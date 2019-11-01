@@ -22,19 +22,25 @@ namespace Ordenamiento
     public partial class MainWindow : Window
     {
         ObservableCollection<int> miLista = new ObservableCollection<int>();
+        ObservableCollection<Alumno> alumnos = new ObservableCollection<Alumno>();
         public MainWindow()
         {
             InitializeComponent();
-            miLista.Add(58);
+            /*miLista.Add(58);
             miLista.Add(35);
             miLista.Add(20);
             miLista.Add(16);
             miLista.Add(14);
             miLista.Add(12);
             miLista.Add(60);
-            miLista.Add(4);
+            miLista.Add(4);*/
 
-            lstNumeros.ItemsSource = miLista;
+            alumnos.Add(new Alumno("José", 9.1f, 2));
+            alumnos.Add(new Alumno("Maria", 9.8f, 0));
+            alumnos.Add(new Alumno("Pedro", 6.4f, 14));
+            alumnos.Add(new Alumno("Ana", 8.5f, 4));
+            alumnos.Add(new Alumno("Andres", 7.7f, 4));
+            lstNumeros.ItemsSource = alumnos;
         }
 
         private void btnOrdenar_Click(object sender, RoutedEventArgs e)
@@ -43,18 +49,18 @@ namespace Ordenamiento
             miLista[0] = miLista[3];
             miLista[3] = temp;*/
 
-            int gap, temp, i, j;
-            gap = miLista.Count / 2;
+            int gap, i;
+            gap = alumnos.Count / 2;
             
             while(gap > 0)
             {
-                for(i=0; i<miLista.Count; i++)
+                for(i=0; i<alumnos.Count; i++)
                 {
-                    if(gap + i < miLista.Count && miLista[i] > miLista[gap + i])
+                    if (gap + i < alumnos.Count && alumnos[i].Promedio > alumnos[gap + i].Promedio)
                     {
-                        temp = miLista[i];
-                        miLista[i] = miLista[gap + i];
-                        miLista[gap + i] = temp;
+                        var temp = alumnos[i];
+                        alumnos[i] = alumnos[gap + i];
+                        alumnos[gap + i] = temp;
 
                     }
                 }
@@ -70,7 +76,7 @@ namespace Ordenamiento
             do
             {
                 intercambio = false;
-                for(int i=0; i<miLista.Count-1; i++)
+                for(int i=0; i<alumnos.Count-1; i++)
                 {
                     if(miLista[i]>miLista[i+1])
                     {
